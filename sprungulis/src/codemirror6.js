@@ -44,13 +44,8 @@ function CodeEditor() {
                 height: '500px',
                 margin: '100px',
                 border: '1px solid #ccc',
-                //display: 'flex',
                 width: '500px',
-                //alignContent: 'left',
-                /* backgroundColor: 'black',
-                color: '#39FF14', */
                 fontFamily: 'monospace'
-                
             }}
         />
     );
