@@ -1,10 +1,19 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+	--gap: 20px;
+	--width: 500px;
+}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.nav h1 {
+  margin: 0;
 }
 
 .cm-editor .cm-content {
@@ -32,13 +41,59 @@
   color: #61dafb;
 }
 
+.nav {
+  background-color: #5cbdb9;
+  margin-top: 0;
+}
+
+.er-headers {
+	display: flex;
+	justify-content: center;
+	gap: var(--gap);
+}
+
+.er-header {
+	width: var(--width);
+	text-align: center;
+	margin: 0;
+}
+
+.er-header h1 {
+	margin: 0 0 8px;
+}
 
 .editor-row {
   display: flex;
-  gap: 24px;
+  /* gap: 24px; */
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
+ /*  gap: 20px; */
+  gap: var(--gap);
+}
+
+.codeExplanation {
+  /* width: 500px; */
+  width: var(--width);
+  min-height: 500px;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lineExplanation {
+  margin-top: 20px;
+  height: 200px;
+  width: 80%;
+  border: 1px solid #ccc;
+}
+
+.Steps {
+  margin-top: 20px;
+  height: 200px;
+  width: 80%;
+  border: 1px solid #ccc;
 }
 
 .controls {
@@ -47,11 +102,16 @@
 
 .output-box {
   height: 500px;
-  width: 500px;
+  width: var(--width);
+  
   border: 1px solid #ccc;
-  padding: 12px;
+  /* padding: 12px; */
   background: #f7f7f7;
   text-align: left;
+}
+
+.output-wrapper {
+  padding: 12px;
 }
 
 .output-title {

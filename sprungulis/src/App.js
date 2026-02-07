@@ -43,21 +43,45 @@ const displayText = error
 
   return (
     <div className="App">
+      <div className="nav">
 
-      <h1>CodeMirror 6 editor</h1>
-      
+        <h1>CodeMirror 6 editor</h1>
+        
 
-      <div className="controls">
-        <button type = "button" onClick={handleRun}>Run Code</button>
+        <div className="controls">
+          <button type = "button" onClick={handleRun}>Run Code</button>
+        </div>
+      </div>
+
+      <div className = "er-headers">
+        <div className="er-header">
+          <h1 className = "Editor-header">Koda redaktors</h1>
+        </div>
+        <div className="er-header">
+          <h1 className="Explanation-header">Izpildes soļi</h1>
+        </div>
+
       </div>
 
       <div className="editor-row">
-        <CodeEditor onChange={setCode} initialDoc={initialCode}/>
-        <div className = "output-box">
-          <pre className={error ? 'output-text output-error' : 'output-text'}>
-            {displayText}
-          </pre>
+        
+        <div className="codeEditor">
+          
+          <CodeEditor onChange={setCode} initialDoc={initialCode}/>
         </div>
+        
+        <div className="codeExplanation">  
+          <div className="lineExplanation"></div>
+          <div className="Steps"></div>
+          
+        </div>
+        {/* <div className = "output-box">
+          <div className = "output-wrapper">
+            <pre className={error ? 'output-text output-error' : 'output-text'}>
+              {displayText}
+            </pre>
+          </div>
+        </div> */}
       </div>
 
 
