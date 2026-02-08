@@ -49,9 +49,6 @@ function CodeEditor({onChange , initialDoc}) {
         <div
             ref={editorRef}
             style={{
-                height: '500px',
-                border: '1px solid #ccc',
-                width: '500px',
                 fontFamily: 'monospace'
             }}
         />

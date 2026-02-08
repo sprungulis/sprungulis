@@ -49,28 +49,30 @@ const displayText = error
         
 
         <div className="controls">
-          <button type = "button" onClick={handleRun}>Run Code</button>
+         {/*  <button type = "button" onClick={handleRun}>Run Code</button> */}
         </div>
       </div>
 
-      <div className = "er-headers">
+      {/* <div className = "er-headers">
         <div className="er-header">
-          <h1 className = "Editor-header">Koda redaktors</h1>
+          
         </div>
         <div className="er-header">
-          <h1 className="Explanation-header">Izpildes soļi</h1>
+          
         </div>
 
-      </div>
+      </div> */}
 
       <div className="editor-row">
         
         <div className="codeEditor">
+          <h2 className = "Editor-header">Koda redaktors</h2>
           
           <CodeEditor onChange={setCode} initialDoc={initialCode}/>
         </div>
         
-        <div className="codeExplanation">  
+        <div className="codeExplanation"> 
+          <h2 className="Explanation-header">Izpildes soļi</h2> 
           <div className="lineExplanation"></div>
           <div className="Steps"></div>
           

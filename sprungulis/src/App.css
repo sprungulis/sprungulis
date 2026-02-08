@@ -1,11 +1,16 @@
 html, body {
   margin: 0;
   padding: 0;
+  font-family: sans-serif;
 }
 
 :root {
 	--gap: 20px;
 	--width: 500px;
+  --darkgreen: #2d8b76;
+  --grey: #fdedef;
+  --lightgreen: #65cdb6;
+  --darkgrey: #263238;
 }
 
 .App {
@@ -18,6 +23,16 @@ html, body {
 
 .cm-editor .cm-content {
   text-align: left;
+}
+.cm-editor {
+  height: 300px;
+  width: 80%;
+  /* width: 400px; */
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  margin: 0 auto;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -42,14 +57,24 @@ html, body {
 }
 
 .nav {
-  background-color: #5cbdb9;
+  background-color: var(--darkgreen);
   margin-top: 0;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--grey);
 }
 
 .er-headers {
+  align-items: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
 	display: flex;
 	justify-content: center;
 	gap: var(--gap);
+  color: var(--darkgrey);
+  background-color: #4bca81;
 }
 
 .er-header {
@@ -59,11 +84,12 @@ html, body {
 }
 
 .er-header h1 {
-	margin: 0 0 8px;
+	margin: 0;
 }
 
 .editor-row {
   display: flex;
+  margin-top: 40px;
   /* gap: 24px; */
   justify-content: center;
   align-items: flex-start;
@@ -71,27 +97,65 @@ html, body {
  /*  gap: 20px; */
   gap: var(--gap);
 }
+.codeEditor,
+.codeExplanation{
+    text-align: left;
+    border-radius: 38px;
+}
 
 .codeExplanation {
   /* width: 500px; */
   width: var(--width);
-  min-height: 500px;
-  border: 1px solid #ccc;
+  height: 360px;
+  border: 2px solid var(--darkgreen);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+  background: var(--lightgreen);
+}
+.codeEditor {
+  border: 1px solid #ccc;
+  height: 360px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.codeEditor > div {
+  width: 100%;
+}
+
+.Explanation-header {
+  align-self: flex-start;
+  margin-left: -2px;
+  margin-top: -1px;
+  padding: 6px 20px;
+  color: var(--grey);
+  border-radius: 999px;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  width: max-content;
+  max-width: 90%;
+  white-space: nowrap;
+  text-align: left;
+  background: var(--darkgreen);
 }
 
 .lineExplanation {
   margin-top: 20px;
-  height: 200px;
+  height: 150px;
   width: 80%;
   border: 1px solid #ccc;
 }
 
 .Steps {
   margin-top: 20px;
-  height: 200px;
+  height: 150px;
   width: 80%;
   border: 1px solid #ccc;
 }
