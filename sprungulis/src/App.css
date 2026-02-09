@@ -1,7 +1,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  /* font-family: sans-serif; */
 }
 
 :root {
@@ -11,10 +11,6 @@ html, body {
   --grey: #fdedef;
   --lightgreen: #65cdb6;
   --darkgrey: #263238;
-}
-
-.App {
-  text-align: center;
 }
 
 .nav h1 {
@@ -27,34 +23,18 @@ html, body {
 .cm-editor {
   height: 300px;
   width: 80%;
-  /* width: 400px; */
-  border: 1px solid #ccc;
+  border: 1px solid var(--darkgreen);
   border-radius: 20px;
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
+  overflow: hidden;
   margin: 0 auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.cm-scroller {
+  border-radius: 20px;
+  overflow: auto;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
 
 .nav {
   background-color: var(--darkgreen);
@@ -87,6 +67,11 @@ html, body {
 	margin: 0;
 }
 
+.editor-row h2 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .editor-row {
   display: flex;
   margin-top: 40px;
@@ -114,9 +99,12 @@ html, body {
   justify-content: center;
   padding-bottom: 20px;
   background: var(--lightgreen);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.4);
 }
 .codeEditor {
-  border: 1px solid #ccc;
+  border: 2px solid var(--darkgreen);
   height: 360px;
   width: 500px;
   display: flex;
