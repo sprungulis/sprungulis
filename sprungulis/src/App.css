@@ -40,8 +40,9 @@ html, body {
   background-color: var(--darkgreen);
   margin-top: 0;
   height: 70px;
+  padding-right: 20px;
   display: flex;
-  justify-content: center;
+  justify-content: right;
   align-items: center;
   color: var(--grey);
 }
@@ -112,6 +113,9 @@ html, body {
   align-items: center;
   justify-content: center;
   padding-bottom: 20px;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .codeEditor > div {
@@ -139,13 +143,19 @@ html, body {
   height: 150px;
   width: 80%;
   border: 1px solid #ccc;
+  border-radius: 20px;
+  background: white;
 }
+
+
 
 .Steps {
   margin-top: 20px;
   height: 150px;
   width: 80%;
   border: 1px solid #ccc;
+  border-radius: 20px;
+  background: white;
 }
 
 .controls {

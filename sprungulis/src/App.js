@@ -2,7 +2,30 @@
 import './App.css';
 import CodeEditor from './codemirror6';
 import React, { useState } from 'react';
+import { Button } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#78e08f',
+    },
+    secondary: {
+      main: '#55efc4',
+    },
+  },
+  typography: {
+    button: {
+      fontFamily:'DM Sans, sans-serif',
+      fontSize: '16px',
+      fontWeight: 'bold',
+      textTransform: 'none',
+    },
+  },
+});
+
 const initialCode = '// write your code here\nconst hello = "world";\nconsole.log(hello);';
+
 
 function App() {
   const [code, setCode] = useState(initialCode);
@@ -45,7 +68,8 @@ const displayText = error
     <div className="App">
       <div className="nav">
 
-        <h1>CodeMirror 6 editor</h1>
+{/*         <h1>CodeMirror 6 editor</h1>
+ */}        <Button variant="contained" color="primary">Palaist kodu</Button>
         
 
         <div className="controls">
@@ -107,4 +131,10 @@ const displayText = error
   );
 }
 
-export default App;
+export default function AppWithTheme() {
+  return (
+  <ThemeProvider theme={theme}>
+    <App />
+  </ThemeProvider>
+  );
+};
