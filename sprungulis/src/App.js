@@ -98,7 +98,7 @@ const displayText = error
         <div className="codeExplanation"> 
           <h2 className="Explanation-header">Izpildes soļi</h2> 
           <div className="lineExplanation">Šeit būs līnijas paskaidrojums</div>
-          <div className="Steps">Šeit būs visi soļi!!!</div>
+          <div className="Steps">Šeit būs visi soļi</div>
           
         </div>
         {/* <div className = "output-box">
