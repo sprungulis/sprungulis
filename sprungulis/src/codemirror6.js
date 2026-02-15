@@ -6,7 +6,7 @@ import React, { useEffect, useRef } from 'react';
 import { EditorView } from '@codemirror/view';
 import { basicSetup } from 'codemirror';
 import { EditorState } from '@codemirror/state';
-import { javascript } from '@codemirror/lang-javascript'; // ?
+import { python } from '@codemirror/lang-python'; // ?
 
 
 function CodeEditor({onChange , initialDoc}) {
@@ -17,10 +17,10 @@ function CodeEditor({onChange , initialDoc}) {
         if(!editorRef.current) return;
         
         const state = EditorState.create({
-            doc: '// write your code here\nconst hello = "world";\nconsole.log(hello);',
+            doc: '# raksti kodu šeit\nsveiki = "pasaule"\nprint(sveiki)',
             extensions: [
                 basicSetup,
-                javascript(),
+                python(),
                 EditorView.updateListener.of((update) => {
                     if (update.docChanged && typeof onChange === 'function') {
                         onChange(update.state.doc.toString());
