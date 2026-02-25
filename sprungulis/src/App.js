@@ -90,7 +90,7 @@ const displayText = error
       <div className="editor-row">
         
         <div className="codeEditor">
-          <h2 className = "Editor-header">Koda redaktors</h2>
+          {/* <h2 className = "Editor-header">Koda redaktors</h2> */}
           
           <CodeEditor onChange={setCode} initialDoc={initialCode}/>
         </div>

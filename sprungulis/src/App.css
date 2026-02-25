@@ -21,8 +21,8 @@ html, body {
   text-align: left;
 }
 .cm-editor {
-  height: 300px;
-  width: 80%;
+  height: 360px;
+  width: 100%;
   border: 1px solid var(--darkgreen);
   border-radius: 20px;
   overflow: hidden;
@@ -86,13 +86,14 @@ html, body {
 .codeEditor,
 .codeExplanation{
     text-align: left;
-    border-radius: 38px;
+    
 }
 
 .codeExplanation {
+  border-radius: 38px;
   /* width: 500px; */
   width: var(--width);
-  height: 360px;
+  height: 340px;
   border: 2px solid var(--darkgreen);
   display: flex;
   flex-direction: column;
@@ -106,14 +107,16 @@ html, body {
 }
 
 .codeEditor {
+  border-radius: 25px;
   border: 2px solid var(--darkgreen);
+  overflow: hidden;
   height: 360px;
   width: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-bottom: 20px;
+  /* padding-bottom: 20px; */
   box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.3),
     0 2px 8px rgba(0, 0, 0, 0.4);
