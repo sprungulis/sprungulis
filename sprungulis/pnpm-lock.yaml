@@ -50,6 +50,9 @@ importers:
       codemirror:
         specifier: ^6.0.2
         version: 6.0.2
+      priede_wasm:
+        specifier: link:C:/Users/marcisand/Dev/sprungulis-code/sprungulis/src/lib/pkg
+        version: link:src/lib/pkg
       react:
         specifier: ^18.2.4
         version: 18.3.1
@@ -59,6 +62,9 @@ importers:
       react-scripts:
         specifier: ^5.0.0
         version: 5.0.0(@babel/plugin-syntax-flow@7.28.6(@babel/core@7.29.0))(@babel/plugin-transform-react-jsx@7.28.6(@babel/core@7.29.0))(@types/babel__core@7.20.5)(eslint@8.57.1)(react@18.3.1)(type-fest@0.21.3)(typescript@4.9.5)
+      react-wasm:
+        specifier: ^1.0.1
+        version: 1.0.1(react@18.3.1)
       save:
         specifier: ^2.9.0
         version: 2.9.0
@@ -771,6 +777,9 @@ packages:
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
+
+  '@babel/runtime@7.2.0':
+    resolution: {integrity: sha512-oouEibCbHMVdZSDlJBO6bZmID/zA/G/Qx3H1d3rSNPTD+L8UNKvCat7aKWSJ74zYbm5zWGh0GQN0hKj8zYFTCg==}
 
   '@babel/runtime@7.28.6':
     resolution: {integrity: sha512-05WQkdpL9COIMz4LjTxGpPNCdlpyimKppYNoJ5Di5EUObifl8t4tuLuUBBZEpoLYOmfvIWrsp9fCl0HoPRVTdA==}
@@ -4720,6 +4729,11 @@ packages:
       react: '>=16.6.0'
       react-dom: '>=16.6.0'
 
+  react-wasm@1.0.1:
+    resolution: {integrity: sha512-iynUWb6Uy8jHvdncg94nDBmjBSP2cmSPI2yAlesbh7IyhTUqCdXCcY+1LFEMa9BxzxJby98X9S2Tb4QWeLn3Ag==}
+    peerDependencies:
+      react: ^16.8.0
+
   react@18.3.1:
     resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
     engines: {node: '>=0.10.0'}
@@ -4756,6 +4770,9 @@ packages:
 
   regenerate@1.4.2:
     resolution: {integrity: sha512-zrceR/XhGYU/d/opr2EKO7aRHUeiBI8qjtfHqADTwZd6Szfy16la6kqD0MIUs5z5hx6AaKa+PixpPrR289+I0A==}
+
+  regenerator-runtime@0.12.1:
+    resolution: {integrity: sha512-odxIc1/vDlo4iZcfXqRYFj0vpXFNoGdKMAUieAlFYO6m/nl5e9KR/beGf41z4a1FI+aQgtjhuaSlDxQ0hmkrHg==}
 
   regenerator-runtime@0.13.11:
     resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==}
@@ -6635,6 +6652,10 @@ snapshots:
       '@babel/plugin-transform-typescript': 7.28.6(@babel/core@7.29.0)
     transitivePeerDependencies:
       - supports-color
+
+  '@babel/runtime@7.2.0':
+    dependencies:
+      regenerator-runtime: 0.12.1
 
   '@babel/runtime@7.28.6': {}
 
@@ -11449,6 +11470,11 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
+  react-wasm@1.0.1(react@18.3.1):
+    dependencies:
+      '@babel/runtime': 7.2.0
+      react: 18.3.1
+
   react@18.3.1:
     dependencies:
       loose-envify: 1.4.0
@@ -11502,6 +11528,8 @@ snapshots:
       regenerate: 1.4.2
 
   regenerate@1.4.2: {}
+
+  regenerator-runtime@0.12.1: {}
 
   regenerator-runtime@0.13.11: {}
 
