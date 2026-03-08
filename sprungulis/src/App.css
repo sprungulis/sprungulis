@@ -197,4 +197,14 @@ html, body {
   color: #b00020;
 }
 
+.highlight {
+  background: yellow !important;
+  animation: highlight-fade 3s ease-out;
+}
+
+@keyframes highlight-fade {
+  0% { background: yellow !important; }
+  100% { background: transparent !important; }
+}
+
 

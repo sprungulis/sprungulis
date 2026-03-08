@@ -231,18 +231,22 @@ function __wbg_get_imports() {
         const ret = getObject(arg0);
         return addHeapObject(ret);
     };
-    imports.wbg.__wbg_self_ce0dbfc45cf2f5be = function() { return handleError(function () {
-        const ret = self.self;
-        return addHeapObject(ret);
-    }, arguments) };
+    imports.wbg.__wbg_self_ce0dbfc45cf2f5be = function () {
+        return handleError(function () {
+          // eslint-disable-next-line no-restricted-globals
+          const ret = self.self;
+          return addHeapObject(ret);
+        }, arguments) };
     imports.wbg.__wbg_window_c6fb939a7f436783 = function() { return handleError(function () {
         const ret = window.window;
         return addHeapObject(ret);
     }, arguments) };
-    imports.wbg.__wbg_globalThis_d1e6af4856ba331b = function() { return handleError(function () {
-        const ret = globalThis.globalThis;
-        return addHeapObject(ret);
-    }, arguments) };
+    imports.wbg.__wbg_globalThis_d1e6af4856ba331b = function () {
+        return handleError(function () {
+          // eslint-disable-next-line no-undef
+          const ret = globalThis.globalThis;
+          return addHeapObject(ret);
+        }, arguments) };
     imports.wbg.__wbg_global_207b558942527489 = function() { return handleError(function () {
         const ret = global.global;
         return addHeapObject(ret);
