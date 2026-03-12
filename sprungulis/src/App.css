@@ -198,12 +198,28 @@ html, body {
 }
 
 .highlight {
-  background: yellow !important;
+  background: 	#10ff00 !important;
   animation: highlight-fade 3s ease-out;
 }
 
+.cm-transformed {
+  background-color: #fff3cd;
+  border-bottom: 2px wavy 	#10ff00;
+  border-radius: 2px;
+  transition: background-color 0.2s;
+}
+
+.com-transformed:hover{
+  background-color:	#10ff00;
+}
+
+.highlight {
+  background-color: #10ff00;
+  box-shadow: 0 0 5px rgba(255, 193, 7, 0.8);
+}
+
 @keyframes highlight-fade {
-  0% { background: yellow !important; }
+  0% { background: 	#10ff00 !important; }
   100% { background: transparent !important; }
 }
 
