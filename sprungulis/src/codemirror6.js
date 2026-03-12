@@ -5,8 +5,22 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { EditorView, Decoration } from '@codemirror/view';
 import { basicSetup } from 'codemirror';
-import { EditorState } from '@codemirror/state';
+import { EditorState, RangeSet } from '@codemirror/state';
 import { python } from '@codemirror/lang-python'; // ?
+//import { RangeSet } from "@codemirror/state";
+
+export function highlightTransformations(ranges) {
+    if (!ranges || ranges.length === 0) return RangeSet.empty;
+
+    const decorations = ranges.map(range => 
+        Decoration.mark({
+            class: "cm-transformed",
+            title: "Code was transformed"
+        }).range(range.from, range.to)
+    );
+
+    return RangeSet.of(decorations, true);
+}
 
 
 function CodeEditor({onChange , value, highlight}) {
@@ -28,7 +42,7 @@ function CodeEditor({onChange , value, highlight}) {
                         onChange(update.state.doc.toString());
                     }
                 }),
-                EditorView.decorations.of(() => Decoration.set(currentDeco))
+                EditorView.decorations.of(() => highlightTransformations(currentDeco))
             ]
         });
 
@@ -42,7 +56,7 @@ function CodeEditor({onChange , value, highlight}) {
         return () => {
             view.destroy();
         }
-    }, []);
+    }, [currentDeco]);
 
     useEffect(() => {
         if (viewRef.current && value !== viewRef.current.state.doc.toString()) {
@@ -59,8 +73,9 @@ function CodeEditor({onChange , value, highlight}) {
                 const lineObj = state.doc.line(highlight.line + 1);
                 const start = lineObj.from + highlight.col;
                 const end = start + highlight.length;
-                const deco = Decoration.mark({class: "highlight"}).range(start, end);
-                setCurrentDeco([deco]);
+               /*  const deco = Decoration.mark({class: "highlight"}).range(start, end);
+                setCurrentDeco([deco]); */
+                setCurrentDeco([{from: start, to: end}]);
                 setTimeout(() => setCurrentDeco([]), 3000); // Remove after 3 seconds
             }
         }
