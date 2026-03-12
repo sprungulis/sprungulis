@@ -2,7 +2,7 @@
 import "./App.css";
 import CodeEditor from "./codemirror6";
 import { highlightTransformations } from "./codemirror6";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Button } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import init, { run } from "priede_wasm";
