@@ -1,18 +1,22 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   /* font-family: sans-serif; */
 }
 
 :root {
-	--gap: 20px;
-	--width: 500px;
+  --gap: 20px;
+  --width: 500px;
   --darkgreen: #2d8b76;
   --grey: #fdedef;
   --lightgreen: #65cdb6;
   --darkgrey: #263238;
 }
-
+.App {
+  display: flex;
+  flex-direction: column;
+}
 .nav h1 {
   margin: 0;
 }
@@ -34,8 +38,6 @@ html, body {
   overflow: auto;
 }
 
-
-
 .nav {
   background-color: var(--darkgreen);
   margin-top: 0;
@@ -51,21 +53,21 @@ html, body {
   align-items: center;
   padding-top: 5px;
   padding-bottom: 5px;
-	display: flex;
-	justify-content: center;
-	gap: var(--gap);
+  display: flex;
+  justify-content: center;
+  gap: var(--gap);
   color: var(--darkgrey);
   background-color: #4bca81;
 }
 
 .er-header {
-	width: var(--width);
-	text-align: center;
-	margin: 0;
+  width: var(--width);
+  text-align: center;
+  margin: 0;
 }
 
 .er-header h1 {
-	margin: 0;
+  margin: 0;
 }
 
 .editor-row h2 {
@@ -80,38 +82,37 @@ html, body {
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
- /*  gap: 20px; */
+  /*  gap: 20px; */
   gap: var(--gap);
+  flex: 1;
 }
 .codeEditor,
-.codeExplanation{
-    text-align: left;
-    
+.codeExplanation {
+  text-align: left;
 }
 
 .codeExplanation {
   border-radius: 38px;
   /* width: 500px; */
   width: var(--width);
-  height: 340px;
   border: 2px solid var(--darkgreen);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   padding-bottom: 20px;
   background: var(--lightgreen);
   box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.3),
     0 2px 8px rgba(0, 0, 0, 0.4);
+    height: 90%;
+
 }
 
 .codeEditor {
   border-radius: 25px;
   border: 2px solid var(--darkgreen);
   overflow: hidden;
-  height: 360px;
-  width: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -120,10 +121,15 @@ html, body {
   box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.3),
     0 2px 8px rgba(0, 0, 0, 0.4);
+  flex: 1;
+  height: 90%;
 }
 
 .codeEditor > div {
   width: 100%;
+}
+.cm-editor {
+  height: 100%;
 }
 
 .Explanation-header {
@@ -152,8 +158,6 @@ html, body {
   background: white;
 }
 
-
-
 .Steps {
   text-align: center;
   margin-top: 20px;
@@ -162,6 +166,31 @@ html, body {
   border: 1px solid #ccc;
   border-radius: 20px;
   background: white;
+  overflow-y: scroll;
+}
+
+.stepMessage {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.4s forwards;
+  padding: 4px 8px;
+  margin: 2px 0;
+  text-align: left;
+  background: rgb(176, 255, 222);
+  margin: 10px;
+}
+
+.lineNumber {
+  font-weight: bold;
+  color: var(--darkgreen);
+  margin-right: 4px;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .controls {
@@ -171,7 +200,7 @@ html, body {
 .output-box {
   height: 500px;
   width: var(--width);
-  
+
   border: 1px solid #ccc;
   /* padding: 12px; */
   background: #f7f7f7;
@@ -203,8 +232,10 @@ html, body {
 }
 
 @keyframes highlight-fade {
-  0% { background: yellow !important; }
-  100% { background: transparent !important; }
+  0% {
+    background: yellow !important;
+  }
+  100% {
+    background: transparent !important;
+  }
 }
-
-

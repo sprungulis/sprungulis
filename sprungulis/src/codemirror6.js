@@ -70,7 +70,8 @@ function CodeEditor({onChange , value, highlight}) {
         <div
             ref={editorRef}
             style={{
-                fontFamily: 'monospace'
+                fontFamily: 'monospace',
+                height: "100%"
             }}
         />
     );
