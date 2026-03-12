@@ -29,6 +29,7 @@ body {
   width: 100%;
   border: 1px solid var(--darkgreen);
   border-radius: 20px;
+  font-size: 20px;
   overflow: hidden;
   margin: 0 auto;
 }
@@ -232,7 +233,7 @@ body {
 }
 
 .cm-transformed {
-  background-color: #fff3cd;
+  background-color: var(--lightgreen);
   border-bottom: 2px wavy 	#10ff00;
   border-radius: 2px;
   transition: background-color 0.2s;
@@ -243,7 +244,7 @@ body {
 }
 
 .highlight {
-  background-color: #10ff00;
+  background-color: var(--darkgreen);
   box-shadow: 0 0 5px rgba(255, 193, 7, 0.8);
 }
 
