@@ -7,7 +7,6 @@ import { Button } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import init, { run } from "priede_wasm";
 import { worker } from "./lib/priede";
-import { CelsiumVM } from "./lib/js_vm/vm";
 
 function increment() {
   worker.postMessage({ type: "increment" });
