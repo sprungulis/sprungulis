@@ -41,3 +41,9 @@ export function step() {
     type: "step"
   })
 }
+export function error_message(a) {
+  worker.postMessage({
+    type: "error",
+    message: a
+  })
+}

@@ -3,7 +3,7 @@ import "./App.css";
 import CodeEditor from "./codemirror6";
 import { highlightTransformations } from "./codemirror6";
 import React, { useEffect, useState, useRef } from "react";
-import { Button, Checkbox, FormControlLabel } from "@mui/material";
+import { Alert, Button, Checkbox, FormControlLabel } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import init, { run } from "priede_wasm";
 import { worker } from "./lib/priede";
@@ -41,6 +41,7 @@ function App() {
   const currentCodeRef = useRef(code);
   const replaceQueueRef = useRef([]); // queue of pending replacements
   const pausedRef = useRef(isPaused);
+  const stoppedRef = useRef(false);
 
   // keep ref synced with latest code state
   useEffect(() => {
@@ -50,6 +51,39 @@ function App() {
   useEffect(() => {
     pausedRef.current = isPaused;
   }, [isPaused]);
+
+  function stopWithError(message) {
+    stoppedRef.current = true;
+    replaceQueueRef.current = [];
+    setError(message || "Nezināma kļūda");
+    setOutput("");
+    setIsPaused(true);
+    pausedRef.current = true;
+  }
+
+  // Catch errors that bypass the worker path (e.g. thrown from wasm/run).
+  useEffect(() => {
+    function onWindowError(e) {
+      const msg = e?.error?.message || e?.message;
+      if (msg) stopWithError(msg);
+    }
+
+    function onUnhandledRejection(e) {
+      const reason = e?.reason;
+      const msg =
+        typeof reason === "string"
+          ? reason
+          : reason?.message || "Unhandled promise rejection";
+      stopWithError(msg);
+    }
+
+    window.addEventListener("error", onWindowError);
+    window.addEventListener("unhandledrejection", onUnhandledRejection);
+    return () => {
+      window.removeEventListener("error", onWindowError);
+      window.removeEventListener("unhandledrejection", onUnhandledRejection);
+    };
+  }, []);
 
   // baseCode is the string to operate on (helps when we call this from a ref or
   // callback). new_value is the replacement text, plus the location details.
@@ -75,6 +109,7 @@ function App() {
   // message handler simply enqueues replace requests
   worker.onmessage = (event) => {
     console.log("worker message", event);
+    if (stoppedRef.current && event.data?.type !== "error") return;
     if (event.data.type === "code_replace") {
       const { new_value, line, col, span } = event.data;
       replaceQueueRef.current.push({
@@ -92,9 +127,14 @@ function App() {
     if (event.data.type === "step") {
       replaceQueueRef.current.push({ type: "step" });
     }
+    if (event.data.type === "error") {
+      const { message } = event.data;
+      stopWithError(message);
+    }
   };
 
   function processQueueUntilStep() {
+    if (stoppedRef.current) return;
     if (pausedRef.current) return;
 
     let localCode = currentCodeRef.current;
@@ -102,7 +142,6 @@ function App() {
 
     while (replaceQueueRef.current.length > 0) {
       const item = replaceQueueRef.current.shift();
-      console.log("qutem ", item);
       
 
       if (item.type === "step") {
@@ -171,9 +210,15 @@ function App() {
             // reset explanations from any prior execution
             setExplanations([]);
             replaceQueueRef.current = [];
+            stoppedRef.current = false;
+            setError("");
             setIsPaused(false);
             pausedRef.current = false;
-            const bytecode = run(code);
+            try {
+              const bytecode = run(code);
+            } catch (e) {
+              stopWithError(e?.message || String(e));
+            }
           }}>
           Palaist kodu
         </Button>
@@ -211,6 +256,14 @@ function App() {
           {/* <button type = "button" onClick={handleRun}>Run Code</button> */}
         </div>
       </div>
+
+      {error && (
+        <div className="errorBanner">
+          <Alert severity="error" variant="filled">
+            {error}
+          </Alert>
+        </div>
+      )}
 
       <div className="editor-row">
         <div className="codeEditor">
