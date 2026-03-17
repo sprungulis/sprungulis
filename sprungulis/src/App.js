@@ -3,18 +3,11 @@ import "./App.css";
 import CodeEditor from "./codemirror6";
 import { highlightTransformations } from "./codemirror6";
 import React, { useEffect, useState, useRef } from "react";
-import { Button } from "@mui/material";
+import { Button, Checkbox, FormControlLabel } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import init, { run } from "priede_wasm";
 import { worker } from "./lib/priede";
 
-function increment() {
-  worker.postMessage({ type: "increment" });
-}
-
-function decrement() {
-  worker.postMessage({ type: "decrement" });
-}
 const theme = createTheme({
   palette: {
     primary: {
@@ -41,15 +34,22 @@ function App() {
   const [error, setError] = useState("");
   const [highlight, setHighlight] = useState(null);
   const [explanations, setExplanations] = useState([]); // queue of explanation messages
+  const [autoRun, setAutoRun] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
 
   // refs to keep state accessible inside callbacks without stale closures
   const currentCodeRef = useRef(code);
   const replaceQueueRef = useRef([]); // queue of pending replacements
+  const pausedRef = useRef(isPaused);
 
   // keep ref synced with latest code state
   useEffect(() => {
     currentCodeRef.current = code;
   }, [code]);
+
+  useEffect(() => {
+    pausedRef.current = isPaused;
+  }, [isPaused]);
 
   // baseCode is the string to operate on (helps when we call this from a ref or
   // callback). new_value is the replacement text, plus the location details.
@@ -89,35 +89,65 @@ function App() {
       const { message, line } = event.data;
       replaceQueueRef.current.push({ type: "explain", message, line });
     }
+    if (event.data.type === "step") {
+      replaceQueueRef.current.push({ type: "step" });
+    }
   };
+
+  function processQueueUntilStep() {
+    if (pausedRef.current) return;
+
+    let localCode = currentCodeRef.current;
+    const explainsToAdd = [];
+
+    while (replaceQueueRef.current.length > 0) {
+      const item = replaceQueueRef.current.shift();
+      console.log("qutem ", item);
+      
+
+      if (item.type === "step") {
+        if (!autoRun) {
+          setIsPaused(true);
+          pausedRef.current = true;
+        }
+        break;
+      }
+
+      if (item.type === "code_replace") {
+        localCode = replace_code(
+          localCode,
+          item.new_value,
+          item.line,
+          item.col,
+          item.span,
+        );
+      } else if (item.type === "explain") {
+        explainsToAdd.push({ message: item.message, line: item.line });
+      }
+
+      if (!autoRun) {
+        // If auto-run is off, keep processing until we hit an explicit `step` marker.
+        continue;
+      }
+    }
+
+    if (localCode !== currentCodeRef.current) {
+      currentCodeRef.current = localCode;
+      setCode(localCode);
+    }
+    if (explainsToAdd.length > 0) {
+      setExplanations((prev) => [...prev, ...explainsToAdd]);
+    }
+  }
 
   // polling effect: check queue and apply replacements or show explanations
   useEffect(() => {
     const interval = setInterval(() => {
-      if (replaceQueueRef.current.length > 0) {
-        const item = replaceQueueRef.current.shift();
-        if (item.type === "code_replace") {
-          setCode((prev) => {
-            const updated = replace_code(
-              prev,
-              item.new_value,
-              item.line,
-              item.col,
-              item.span,
-            );
-            return updated;
-          });
-        } else if (item.type === "explain") {
-          setExplanations((prev) => [
-            ...prev,
-            { message: item.message, line: item.line },
-          ]);
-        }
-      }
+      if (replaceQueueRef.current.length > 0) processQueueUntilStep();
     }, 200); // adjust delay as needed
 
     return () => clearInterval(interval);
-  }, []);
+  }, [autoRun]);
 
   useEffect(() => {
     init().then(() => {
@@ -140,10 +170,43 @@ function App() {
           onClick={() => {
             // reset explanations from any prior execution
             setExplanations([]);
+            replaceQueueRef.current = [];
+            setIsPaused(false);
+            pausedRef.current = false;
             const bytecode = run(code);
           }}>
           Palaist kodu
         </Button>
+
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={autoRun}
+              onChange={(e) => {
+                const enabled = e.target.checked;
+                setAutoRun(enabled);
+                if (enabled) {
+                  setIsPaused(false);
+                  pausedRef.current = false;
+                }
+              }}
+            />
+          }
+          label="Automātiski soļot"
+        />
+
+        {!autoRun && (
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => {
+              setIsPaused(false);
+              pausedRef.current = false;
+              processQueueUntilStep();
+            }}>
+            Solis
+          </Button>
+        )}
         <div className="controls">
           {/* <button type = "button" onClick={handleRun}>Run Code</button> */}
         </div>

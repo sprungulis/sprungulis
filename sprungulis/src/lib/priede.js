@@ -36,4 +36,8 @@ export function explain(a, line, col, span) {
     line: line,
   });
 }
-export function step() {}
+export function step() {
+  worker.postMessage({
+    type: "step"
+  })
+}
