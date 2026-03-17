@@ -1,12 +1,13 @@
 //import logo from './logo.svg';
 import "./App.css";
-import CodeEditor from "./codemirror6";
-import { highlightTransformations } from "./codemirror6";
 import React, { useEffect, useState, useRef } from "react";
-import { Alert, Button, Checkbox, FormControlLabel } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import init, { run } from "priede_wasm";
 import { worker } from "./lib/priede";
+import TopBar from "./components/TopBar";
+import ErrorBanner from "./components/ErrorBanner";
+import EditorPanel from "./components/EditorPanel";
+import ExplanationPanel from "./components/ExplanationPanel";
 
 const theme = createTheme({
   palette: {
@@ -194,99 +195,45 @@ function App() {
     });
   }, []);
 
-  const displayText = error
-    ? `Error: ${error}${output ? "\n" + output : ""}`
-    : output || "No output yet.";
-
   return (
     <div className="App">
-      <div className="nav">
-        {/*         <h1>CodeMirror 6 editor</h1>
-         */}{" "}
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            // reset explanations from any prior execution
-            setExplanations([]);
-            replaceQueueRef.current = [];
-            stoppedRef.current = false;
-            setError("");
+      <TopBar
+        autoRun={autoRun}
+        onAutoRunChange={(e) => {
+          const enabled = e.target.checked;
+          setAutoRun(enabled);
+          if (enabled) {
             setIsPaused(false);
             pausedRef.current = false;
-            try {
-              const bytecode = run(code);
-            } catch (e) {
-              stopWithError(e?.message || String(e));
-            }
-          }}>
-          Palaist kodu
-        </Button>
-
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={autoRun}
-              onChange={(e) => {
-                const enabled = e.target.checked;
-                setAutoRun(enabled);
-                if (enabled) {
-                  setIsPaused(false);
-                  pausedRef.current = false;
-                }
-              }}
-            />
           }
-          label="Automātiski soļot"
-        />
+        }}
+        onRun={() => {
+          // reset explanations from any prior execution
+          setExplanations([]);
+          replaceQueueRef.current = [];
+          stoppedRef.current = false;
+          setError("");
+          setIsPaused(false);
+          pausedRef.current = false;
+          try {
+            const bytecode = run(code);
+          } catch (e) {
+            stopWithError(e?.message || String(e));
+          }
+        }}
+        onStep={() => {
+          setIsPaused(false);
+          pausedRef.current = false;
+          processQueueUntilStep();
+        }}
+        showStep={!autoRun}
+      />
 
-        {!autoRun && (
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => {
-              setIsPaused(false);
-              pausedRef.current = false;
-              processQueueUntilStep();
-            }}>
-            Solis
-          </Button>
-        )}
-        <div className="controls">
-          {/* <button type = "button" onClick={handleRun}>Run Code</button> */}
-        </div>
-      </div>
-
-      {error && (
-        <div className="errorBanner">
-          <Alert severity="error" variant="filled">
-            {error}
-          </Alert>
-        </div>
-      )}
+      <ErrorBanner error={error} />
 
       <div className="editor-row">
-        <div className="codeEditor">
-          <CodeEditor onChange={setCode} value={code} highlight={highlight} />
-        </div>
-
-        <div className="codeExplanation">
-          <h2 className="Explanation-header">Izpildes soļi</h2>
-          {explanations.length === 0
-            ? "Šeit parādīsies koda paskaidrojumi"
-            : explanations.map((exp, idx) => (
-                <div key={idx} className="stepMessage">
-                  {exp.line ? (
-                    <>
-                      <span className="lineNumber">{exp.line}</span>
-                      rindiņā: {exp.message}
-                    </>
-                  ) : (
-                    exp.message
-                  )}
-                </div>
-              ))}
-        </div>
+        <EditorPanel code={code} onChange={setCode} highlight={highlight} />
+        <ExplanationPanel explanations={explanations} />
       </div>
     </div>
   );
