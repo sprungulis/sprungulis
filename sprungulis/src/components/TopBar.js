@@ -17,6 +17,7 @@ export default function TopBar({
       <NavLink destinationName="Redaktors" onPageChange={onPageChange} currentPage={currentPage} />
       <NavLink destinationName="Spēles" onPageChange={onPageChange} currentPage={currentPage} />
 
+    {currentPage === 'editor' && (
       <div className="controls">
       
       <Button variant="contained" color="primary" onClick={onRun}>
@@ -35,8 +36,9 @@ export default function TopBar({
       )}
       </div>
 
-      
+      )}
     </div>
+
   );
 }
 
