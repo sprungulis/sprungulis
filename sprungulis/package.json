@@ -20,6 +20,7 @@
     "priede_wasm": "link:C:/Users/marcisand/Dev/sprungulis-code/sprungulis/src/lib/pkg",
     "react": "^18.2.4",
     "react-dom": "^18.2.4",
+    "react-router-dom": "^7.13.1",
     "react-scripts": "^5.0.0",
     "react-wasm": "^1.0.1",
     "save": "^2.9.0",

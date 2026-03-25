@@ -36,6 +36,7 @@ export function explain(a, line, col, span) {
     line: line,
   });
 }
+<<<<<<< HEAD
 export function step() {
   worker.postMessage({
     type: "step"
@@ -47,3 +48,11 @@ export function error_message(a) {
     message: a
   })
 }
+=======
+
+export function funkcija(){
+  
+}
+
+export function step() {}
+>>>>>>> fb2a534 (GameState Generation)
