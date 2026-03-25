@@ -37,6 +37,7 @@ function App() {
   const [explanations, setExplanations] = useState([]); // queue of explanation messages
   const [autoRun, setAutoRun] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
+  const [currentPage, setCurrentPage] = useState('editor');
 
   // refs to keep state accessible inside callbacks without stale closures
   const currentCodeRef = useRef(code);
@@ -198,6 +199,8 @@ function App() {
   return (
     <div className="App">
       <TopBar
+        currentPage={currentPage} 
+        onPageChange={setCurrentPage}
         autoRun={autoRun}
         onAutoRunChange={(e) => {
           const enabled = e.target.checked;
@@ -229,13 +232,29 @@ function App() {
         showStep={!autoRun}
       />
 
-      <ErrorBanner error={error} />
-
-      <div className="editor-row">
-        <EditorPanel code={code} onChange={setCode} highlight={highlight} />
-        <ExplanationPanel explanations={explanations} />
+    {currentPage === 'home' && (
+      <div>
+        <h1>Home Page coming soon!</h1>
       </div>
-    </div>
+    )}
+      {currentPage === 'editor' && (
+        <>
+          <ErrorBanner error={error} />
+          <div className="editor-row">
+            <EditorPanel code={code} onChange={setCode} highlight={highlight} />
+            <ExplanationPanel explanations={explanations} />
+          </div>
+        </>
+      )}
+
+      {currentPage === 'games' && (
+      <div>
+        <h1>Games Page Coming Soon</h1>
+      </div>
+    )}
+
+
+     </div> 
   );
 }
 

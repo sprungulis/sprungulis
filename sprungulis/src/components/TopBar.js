@@ -1,7 +1,10 @@
 import React from "react";
 import { Button, Checkbox, FormControlLabel } from "@mui/material";
+import NavLink from "./navLink";
 
 export default function TopBar({
+  currentPage,
+  onPageChange,
   autoRun,
   onAutoRunChange,
   onRun,
@@ -10,6 +13,12 @@ export default function TopBar({
 }) {
   return (
     <div className="nav">
+      <NavLink destinationName="Sākums" onPageChange={onPageChange} currentPage={currentPage} />
+      <NavLink destinationName="Redaktors" onPageChange={onPageChange} currentPage={currentPage} />
+      <NavLink destinationName="Spēles" onPageChange={onPageChange} currentPage={currentPage} />
+
+      <div className="controls">
+      
       <Button variant="contained" color="primary" onClick={onRun}>
         Palaist kodu
       </Button>
@@ -24,8 +33,9 @@ export default function TopBar({
           Solis
         </Button>
       )}
+      </div>
 
-      <div className="controls" />
+      
     </div>
   );
 }
