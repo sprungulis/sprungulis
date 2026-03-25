@@ -234,7 +234,8 @@ function App() {
 
     {currentPage === 'home' && (
       <div>
-        <h1>Home Page coming soon!</h1>
+        <h1>Home Page coming soon! Inspiration(but in priede green):</h1>
+        <img src="images/Capture.PNG" style={{width: '1000px'}} />
       </div>
     )}
       {currentPage === 'editor' && (
