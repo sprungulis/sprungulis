@@ -26,14 +26,14 @@ export default function TopBar({
 
       <FormControlLabel
         control={<Checkbox checked={autoRun} onChange={onAutoRunChange} />}
-        label="Automātiski soļot"
+        label="Auto"
       />
 
-      {showStep && (
-        <Button variant="contained" color="secondary" onClick={onStep}>
+      {/* {showStep && ( */}
+        <Button variant="contained" color="secondary" onClick={onStep} disabled={!showStep} className={!showStep ? "step-btn-hidden" : ""} aria-hidden={!showStep} tabIndex={showStep ? 0: -1}>
           Solis
         </Button>
-      )}
+      {/* )} */}
       </div>
 
       )}

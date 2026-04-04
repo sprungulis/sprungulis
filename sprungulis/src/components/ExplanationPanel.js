@@ -11,7 +11,9 @@ export default function ExplanationPanel({ explanations }) {
               {exp.line ? (
                 <>
                   <span className="lineNumber">{exp.line}</span>
+                  <span className="explanationLine">
                   rindiņā: {exp.message}
+                  </span>
                 </>
               ) : (
                 exp.message
