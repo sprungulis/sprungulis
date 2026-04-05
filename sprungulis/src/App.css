@@ -283,7 +283,9 @@ pointer-events: none;
   0% { background: 	#10ff00 !important; }
   100% { background: transparent !important; }
 }
-
+.nav {
+  overflow: hidden;
+}
 .nav-link {
   border: 0;
   background: var(--darkgreen);
