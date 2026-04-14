@@ -23,6 +23,18 @@ export function onDone(listener) {
 }
 
 
+//!!!READ!!!
+    // no Priede.js jacallo input() ar stringu, kas apraksta darbibu, piem "move right 3", "pickup", "drop". Beigas vajad but "done" kas passos visus generated states uz RoboGame.jsx.
+    //neesmu pilniba parliecinats ka codemirror ir pareizi setupots. lai executotu Priedes lietas
+    //ja grib ka jaizsauc konkretia funkcija kartai darbibai nevis viena input funckija ar argumentu, tad var izmantot kk šadu:
+    /*
+    export function move(dir,times){
+        const action={"type":"move","dir":dir,"times":times};
+        input(action);
+    }
+    tad ari janonem if statements input funckija un vnk jasagaida action
+    */
+
 export function input(input){
 
     let action;
