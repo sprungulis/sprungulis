@@ -1,6 +1,5 @@
 const gridSize = 4;
 const wallCount = 3;
-const animationDelay = 400;
 
 function randomPosition(){
     return Math.floor(Math.random() * gridSize);
@@ -75,25 +74,26 @@ export function genNextPos(gameState, dir) {
 
 //state var pievienot ari "CodeMirror":"ko highlightot,samainit, etc.."
 export function applyAction(gameState, action) {
-    //action will probabbly be {"type":"(move/pickup/drop)","dir":"(left/right/up/down)","times":number}
     if (action.type === "move") {
-        let actionList = []
+        let stateList = []
         for(let i=0;i<action.times;i++){
         const nextPos = genNextPos(gameState, action.dir);
 
         if (!nextPos) return false;
-        //vai ari break return fals vieta, atkarigs vai uz error grib visus moves cancelot vai darit lidz error vietai.
         
         const nextState = {
             ...gameState,
             robotPos: nextPos,
             ballPos: gameState.pickedUp ? nextPos : gameState.ballPos,
         };
-        actionList.push(nextState);
+        
+        stateList.push(nextState);
         gameState=nextState;
     }
-        return actionList //ensure this list can properly be pushed to the main queue in RoboGame, to not get [action1, [action2,action3], action4]
+        return stateList
     }
+
+    
 
     if (action.type === "pickup") {
         if(gameState.robotPos[0]==gameState.ballPos[0] && gameState.robotPos[1]==gameState.ballPos[1]){
@@ -105,6 +105,6 @@ export function applyAction(gameState, action) {
         return [{ ...gameState, pickedUp: false }];
     }
 
-    return false; //nezinama darbiba
+    return false;
 }
 

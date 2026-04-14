@@ -19,6 +19,19 @@ export function wasm_print(a) {
   console.log(a);
   //Priedes izvades funkcija
 }
+
+export function error_message(message) {
+  console.error(message);
+  worker.postMessage({
+    type: "error",
+    message,
+  });
+}
+
+export function get_stumbrs_data() {
+  return null;
+}
+
 export function code_replace(a, line, col, span) {
   console.log(a, line, col, span);
   //Koda aizvietošana
@@ -36,23 +49,9 @@ export function explain(a, line, col, span) {
     line: line,
   });
 }
-<<<<<<< HEAD
-export function step() {
-  worker.postMessage({
-    type: "step"
-  })
-}
-export function error_message(a) {
-  worker.postMessage({
-    type: "error",
-    message: a
-  })
-}
-=======
 
 export function funkcija(){
   
 }
 
 export function step() {}
->>>>>>> fb2a534 (GameState Generation)
