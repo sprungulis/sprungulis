@@ -8,6 +8,8 @@ import TopBar from "./components/TopBar";
 import ErrorBanner from "./components/ErrorBanner";
 import EditorPanel from "./components/EditorPanel";
 import ExplanationPanel from "./components/ExplanationPanel";
+import { Box, Container, Typography, Button, Stack } from "@mui/material";
+import { Lightning } from "@mui/icons-material";
 
 const theme = createTheme({
   palette: {
@@ -233,10 +235,207 @@ function App() {
       />
 
     {currentPage === 'home' && (
-      <div>
+      /* <div>
         <h1>Home Page coming soon! Inspiration(but in priede green):</h1>
         <img src="images/Capture.PNG" style={{width: '1000px'}} />
-      </div>
+      </div> */
+      <>
+    {/* Promotional Banner */}
+    <Box
+      sx={{
+        width: '100%',
+        backgroundColor: '#2d8b76',
+        padding: '10px 0',
+        textAlign: 'center',
+      }}
+    >
+      <Typography
+        sx={{
+          color: '#fdedef',
+          fontSize: '14px',
+          fontWeight: '500',
+          letterSpacing: '0.5px',
+        }}
+      >
+        Free Courses 🍁 Sale Ends Soon, Get It Now →
+      </Typography>
+    </Box>
+
+    {/* Main Hero Section */}
+    <Container maxWidth="md">
+      <Box
+        sx={{
+          paddingTop: '80px',
+          paddingBottom: '80px',
+          textAlign: 'center',
+        }}
+      >
+        {/* Headline Badge */}
+        <Box
+          sx={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            backgroundColor: '#f0f0f0',
+            borderRadius: '24px',
+            padding: '8px 16px',
+            marginBottom: '24px',
+          }}
+        >
+          <Lightning
+            sx={{
+              color: '#2d8b76',
+              fontSize: '18px',
+            }}
+          />
+          <Typography
+            sx={{
+              fontSize: '13px',
+              fontWeight: '600',
+              color: '#263238',
+              margin: 0,
+            }}
+          >
+            <span style={{ color: '#2d8b76', fontWeight: '700' }}>Unlock</span> Your Creative Potential
+          </Typography>
+        </Box>
+
+        {/* Main Heading */}
+        <Typography
+          variant="h1"
+          sx={{
+            fontSize: 'clamp(32px, 5vw, 56px)',
+            fontWeight: '700',
+            color: '#263238',
+            marginBottom: '16px',
+            lineHeight: '1.2',
+          }}
+        >
+          with Online Design and Development Courses.
+        </Typography>
+
+        {/* Sub-heading */}
+        <Typography
+          variant="body1"
+          sx={{
+            fontSize: '16px',
+            color: '#757575',
+            marginBottom: '40px',
+            maxWidth: '500px',
+            margin: '0 auto 40px',
+            lineHeight: '1.6',
+          }}
+        >
+          Learn from Industry Experts and Enhance Your Skills.
+        </Typography>
+
+        {/* CTA Buttons */}
+        <Stack
+          direction="row"
+          spacing={2}
+          justifyContent="center"
+          sx={{
+            flexWrap: 'wrap',
+            gap: '12px',
+          }}
+        >
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: '#2d8b76',
+              color: '#fdedef',
+              fontSize: '14px',
+              fontWeight: '600',
+              padding: '12px 32px',
+              textTransform: 'none',
+              borderRadius: '8px',
+              border: 'none',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              '&:hover': {
+                backgroundColor: '#1e6654',
+                boxShadow: '0 4px 12px rgba(45, 139, 118, 0.3)',
+              },
+            }}
+          >
+            Explore Courses
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{
+              backgroundColor: '#ffffff',
+              color: '#263238',
+              fontSize: '14px',
+              fontWeight: '600',
+              padding: '12px 32px',
+              textTransform: 'none',
+              borderRadius: '8px',
+              border: '1.5px solid #d0d0d0',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              '&:hover': {
+                backgroundColor: '#f5f5f5',
+                borderColor: '#2d8b76',
+              },
+            }}
+          >
+            View Pricing
+          </Button>
+        </Stack>
+      </Box>
+
+      {/* Client/Logo Ribbon */}
+      <Box
+        sx={{
+          backgroundColor: '#ffffff',
+          borderRadius: '16px',
+          padding: '40px 30px',
+          marginBottom: '80px',
+          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
+          border: '1px solid #f0f0f0',
+        }}
+      >
+        <Typography
+          sx={{
+            fontSize: '12px',
+            color: '#999',
+            textAlign: 'center',
+            textTransform: 'uppercase',
+            letterSpacing: '1px',
+            marginBottom: '24px',
+            fontWeight: '600',
+          }}
+        >
+          Trusted by leading companies
+        </Typography>
+        <Stack
+          direction="row"
+          spacing={3}
+          justifyContent="center"
+          alignItems="center"
+          sx={{
+            flexWrap: 'wrap',
+            gap: '20px',
+          }}
+        >
+          {['zapier', 'Spotify', 'zoom', 'amazon', 'Adobe', 'Notion', 'NETFLIX'].map((company, index) => (
+            <Typography
+              key={index}
+              sx={{
+                fontSize: '13px',
+                fontWeight: '600',
+                color: '#999',
+                textAlign: 'center',
+                minWidth: '60px',
+              }}
+            >
+              {company}
+            </Typography>
+          ))}
+        </Stack>
+      </Box>
+    </Container>
+  </>
     )}
       {currentPage === 'editor' && (
         <>
