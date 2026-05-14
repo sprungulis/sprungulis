@@ -9,7 +9,7 @@ import ErrorBanner from "./components/ErrorBanner";
 import EditorPanel from "./components/EditorPanel";
 import ExplanationPanel from "./components/ExplanationPanel";
 import { Box, Container, Typography, Button, Stack } from "@mui/material";
-import { Lightning } from "@mui/icons-material";
+
 
 const theme = createTheme({
   palette: {
@@ -235,32 +235,8 @@ function App() {
       />
 
     {currentPage === 'home' && (
-      /* <div>
-        <h1>Home Page coming soon! Inspiration(but in priede green):</h1>
-        <img src="images/Capture.PNG" style={{width: '1000px'}} />
-      </div> */
+      
       <>
-    {/* Promotional Banner */}
-    <Box
-      sx={{
-        width: '100%',
-        backgroundColor: '#2d8b76',
-        padding: '10px 0',
-        textAlign: 'center',
-      }}
-    >
-      <Typography
-        sx={{
-          color: '#fdedef',
-          fontSize: '14px',
-          fontWeight: '500',
-          letterSpacing: '0.5px',
-        }}
-      >
-        Free Courses 🍁 Sale Ends Soon, Get It Now →
-      </Typography>
-    </Box>
-
     {/* Main Hero Section */}
     <Container maxWidth="md">
       <Box
@@ -272,33 +248,28 @@ function App() {
       >
         {/* Headline Badge */}
         <Box
-          sx={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '6px',
-            backgroundColor: '#f0f0f0',
-            borderRadius: '24px',
-            padding: '8px 16px',
-            marginBottom: '24px',
-          }}
-        >
-          <Lightning
-            sx={{
-              color: '#2d8b76',
-              fontSize: '18px',
-            }}
-          />
-          <Typography
-            sx={{
-              fontSize: '13px',
-              fontWeight: '600',
-              color: '#263238',
-              margin: 0,
-            }}
-          >
-            <span style={{ color: '#2d8b76', fontWeight: '700' }}>Unlock</span> Your Creative Potential
-          </Typography>
-        </Box>
+  sx={{
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '6px',
+    backgroundColor: '#f0f0f0',
+    borderRadius: '24px',
+    padding: '8px 16px',
+    marginBottom: '24px',
+  }}
+>
+  <span style={{ fontSize: '18px' }}>⚡</span>
+  <Typography
+    sx={{
+      fontSize: '13px',
+      fontWeight: '600',
+      color: '#263238',
+      margin: 0,
+    }}
+  >
+    <span style={{ color: '#2d8b76', fontWeight: '700' }}>Atklāj</span> Savas Programmēšanas Prasmes
+  </Typography>
+</Box>
 
         {/* Main Heading */}
         <Typography
@@ -311,7 +282,7 @@ function App() {
             lineHeight: '1.2',
           }}
         >
-          with Online Design and Development Courses.
+          Interaktīvā Veidā
         </Typography>
 
         {/* Sub-heading */}
@@ -326,7 +297,7 @@ function App() {
             lineHeight: '1.6',
           }}
         >
-          Learn from Industry Experts and Enhance Your Skills.
+          Mācies caur interaktīvām spēlēm, kursiem un koda paskaidrojošu koda redaktoru.
         </Typography>
 
         {/* CTA Buttons */}
@@ -358,7 +329,7 @@ function App() {
               },
             }}
           >
-            Explore Courses
+            Izpētīt spēles
           </Button>
           <Button
             variant="outlined"
@@ -379,7 +350,7 @@ function App() {
               },
             }}
           >
-            View Pricing
+            Cenas
           </Button>
         </Stack>
       </Box>
@@ -406,7 +377,7 @@ function App() {
             fontWeight: '600',
           }}
         >
-          Trusted by leading companies
+          Mūs jau izmanto
         </Typography>
         <Stack
           direction="row"
@@ -418,7 +389,7 @@ function App() {
             gap: '20px',
           }}
         >
-          {['zapier', 'Spotify', 'zoom', 'amazon', 'Adobe', 'Notion', 'NETFLIX'].map((company, index) => (
+          {['uzņēmums1', 'skola1', 'uzņēmums2', 'skola2', 'uzņēmums3', 'skola3'].map((company, index) => (
             <Typography
               key={index}
               sx={{

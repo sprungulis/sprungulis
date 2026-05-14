@@ -23,7 +23,7 @@ export function highlightTransformations(ranges) {
 }
 
 
-function CodeEditor({onChange , value, highlight}) {
+export default function CodeEditor({onChange , value, highlight}) {
     const editorRef = useRef(null);
     const viewRef = useRef(null);
     const [currentDeco, setCurrentDeco] = useState([]);
@@ -91,6 +91,4 @@ function CodeEditor({onChange , value, highlight}) {
         />
     );
 }
-
-export default CodeEditor;
 
