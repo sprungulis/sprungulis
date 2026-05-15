@@ -1,3 +1,5 @@
+# Correct directory: make sure you navigate to sprungulis/sprungulis folder
+
 # Package manager: PNPM
 to install dependecies run `pnpm install` 
 
